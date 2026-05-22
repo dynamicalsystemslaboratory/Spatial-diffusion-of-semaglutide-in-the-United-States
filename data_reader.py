@@ -23,6 +23,7 @@ import libpysal
 from libpysal.weights import KNN, Rook
 
 
+
 def ozempic_health_year(df_ozempic_2022_COUNTY, year):
     county_ozempic_health_ffr = df_ozempic_2022_COUNTY.merge(county_health, left_on='COUNTY',right_on='FIPS')
     # county_ozempic_health_ffr = county_ozempic_health_ffr[(county_ozempic_health_ffr['Population_2020']!=0)&(county_ozempic_health_ffr['Suicide']!=0)]
