@@ -123,10 +123,18 @@ effect = 'ATT'
 # fig, axes = plt.subplots(2, 3, figsize=(20, 10))
 all_gdfs = []
 
-cmap = sns.color_palette("Set2", n_colors=len(years))
-palette = {j: cmap[j] for j in range(len(years))}
+plt.rcParams.update({
+    'font.size': 25,
+    "font.family": "arial",
+    "mathtext.fontset": "cm",
+    "mathtext.default": "it",
+    "mathtext.it": "arial",
+})
 plt.figure(figsize=(14, 8))
 plt.tick_params(bottom=True, left=True, direction='out')
+
+cmap = sns.color_palette("Set2", n_colors=len(years))
+palette = {j: cmap[j] for j in range(len(years))}
 
 n_years = len(years)
 jitter_width = 0.6  # Total horizontal spread
@@ -271,17 +279,7 @@ for i, year in enumerate(years):
     df_res['CI_lower'] = df_res[effect] - 1.96 * df_res['SE']
     df_res['CI_upper'] = df_res[effect] + 1.96 * df_res['SE']
 
-    plt.rcParams.update({
-    'font.size' : 25,
-    # "lines.linewidth": 2,
-    # 'lines.markersize':10,
-    "font.family":"arial",
-    #"font.serif": ["Computer Modern Roman"],
-    "mathtext.fontset": "cm",
-    "mathtext.default": "it",    
-    "mathtext.it"  : "arial",
-        })
-    
+
     shifted_k = df_res['K'] + offsets[i]
     df_res['shifted_k'] = shifted_k
     plt.errorbar(df_res['shifted_k'], 
@@ -293,12 +291,7 @@ for i, year in enumerate(years):
                 capsize=5, markersize=8,alpha=0.7,
                 label=f'{year}')
 
-    plt.axhline(0, color='gray', linestyle='--')
-    plt.xlabel(r'Number of macroclusters ($\mathit{k}$)', fontsize=25)
-    plt.ylabel(rf'{effect} estimate ($\tau$)',fontsize=25)
-    plt.tick_params(length=10)
-    plt.xticks(range(5, 26, 2))
-    plt.ylim(-0.025, 0.15)
+    
     
     # plt.ylim(-0.14, 0.02)
     # Adding significance markers for p < 0.05
@@ -318,10 +311,19 @@ for i, year in enumerate(years):
                          )
     # plt.title(f'Sensitivity of {Y_col} to Cluster Size (K)', fontsize=20)
     # plt.grid(axis='y', alpha=0.3)
+
 leg = plt.legend(title="$\star$ denotes $p < 0.05$",fontsize=25,
            ncols=3,
            loc='upper left', frameon=False)
 leg._legend_box.align = "left"
+
+plt.axhline(0, color='gray', linestyle='--')
+plt.xlabel(rf"Number of macroclusters ($k$)", fontsize=25)
+plt.ylabel(rf"ATT estimate ($\tau$)",fontsize=25)
+plt.tick_params(length=10)
+plt.xticks(range(5, 26, 2),fontsize=25)
+plt.ylim(-0.025, 0.15)
+plt.yticks(fontsize=25)
 plt.tight_layout()
 # plt.savefig(f"causal_sensitivity_{effect}_DEP2024_ALL.png", dpi=300, bbox_inches="tight")
 # plt.close()
@@ -513,16 +515,16 @@ for year in years:
     if not df_plot.empty:
         plt.figure(figsize=(14, 8))
         plt.tick_params(bottom=True, left=True, direction='out')
-        plt.rcParams.update({
-            'font.size' : 25,
-            # "lines.linewidth": 2,
-            # 'lines.markersize':10,
-            "font.family":"arial",
-            #"font.serif": ["Computer Modern Roman"],
-            "mathtext.fontset": "cm",
-            "mathtext.default": "it",    
-            "mathtext.rm"  : "arial",
-                })
+        # plt.rcParams.update({
+        #     'font.size' : 25,
+        #     # "lines.linewidth": 2,
+        #     # 'lines.markersize':10,
+        #     "font.family":"arial",
+        #     #"font.serif": ["Computer Modern Roman"],
+        #     "mathtext.fontset": "cm",
+        #     "mathtext.default": "it",    
+        #     "mathtext.rm"  : "arial",
+        #         })
         # Use a specific color palette for the 4 subgroups
         palette = {'HH': "#dd6868", 
                 'HL': '#985bac',
