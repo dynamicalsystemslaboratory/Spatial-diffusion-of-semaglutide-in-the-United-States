@@ -279,7 +279,7 @@ for i, year in enumerate(years):
     #"font.serif": ["Computer Modern Roman"],
     "mathtext.fontset": "cm",
     "mathtext.default": "it",    
-    "mathtext.rm"  : "arial",
+    "mathtext.it"  : "arial",
         })
     
     shifted_k = df_res['K'] + offsets[i]
@@ -294,8 +294,8 @@ for i, year in enumerate(years):
                 label=f'{year}')
 
     plt.axhline(0, color='gray', linestyle='--')
-    plt.xlabel(r'Number of macroclusters ($k$)', )
-    plt.ylabel(f'{effect} estimate ($\\tau$)',)
+    plt.xlabel(r'Number of macroclusters ($\mathit{k}$)', fontsize=25)
+    plt.ylabel(rf'{effect} estimate ($\tau$)',fontsize=25)
     plt.tick_params(length=10)
     plt.xticks(range(5, 26, 2))
     plt.ylim(-0.025, 0.15)
@@ -318,14 +318,14 @@ for i, year in enumerate(years):
                          )
     # plt.title(f'Sensitivity of {Y_col} to Cluster Size (K)', fontsize=20)
     # plt.grid(axis='y', alpha=0.3)
-leg = plt.legend(title="$\star$ denotes $p < 0.05$",
+leg = plt.legend(title="$\star$ denotes $p < 0.05$",fontsize=25,
            ncols=3,
            loc='upper left', frameon=False)
 leg._legend_box.align = "left"
 plt.tight_layout()
 # plt.savefig(f"causal_sensitivity_{effect}_DEP2024_ALL.png", dpi=300, bbox_inches="tight")
-plt.close()
-# plt.show()
+# plt.close()
+plt.show()
 
 
 
